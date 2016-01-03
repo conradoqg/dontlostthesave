@@ -1,0 +1,19 @@
+{
+  "name": "dontlostthesave",
+  "version": "0.0.1",
+  "authors": [
+    "Conrado Quilles Gomes <conradoqg@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic-ui": "~2.1.7",
+    "moment": "~2.10.6"
+  }
+}

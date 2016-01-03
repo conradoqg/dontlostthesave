@@ -1,0 +1,36 @@
+return {
+  slots={
+    {
+      character="wilson",
+      continue_pending=false,
+      current_mode="survival",
+      dlc={ CAPY_DLC=false, REIGN_OF_GIANTS=true },
+      modes={ cave={  }, survival={ files={ "survival_1" } } },
+      mods={  },
+      resurrectors={  },
+      save_id="34220003@steam-1450301678-1" 
+    },
+    { modes={  }, save_id="34220003@steam-1449923069-2" },
+    {
+      dlc={  },
+      modes={ survival={  } },
+      mods={  },
+      resurrectors={  },
+      save_id="34220003@steam-1431317440-3" 
+    },
+    {
+      dlc={  },
+      modes={ survival={  } },
+      mods={  },
+      resurrectors={  },
+      save_id="34220003@steam-1431317440-4" 
+    },
+    {
+      dlc={  },
+      modes={ survival={  } },
+      mods={  },
+      resurrectors={  },
+      save_id="34220003@steam-1431317440-5" 
+    } 
+  } 
+}
