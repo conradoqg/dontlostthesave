@@ -4,6 +4,10 @@
     "version": "0.0.1",
     "description": "Don't lost your Don't Starve saves anymore.",
     "main": "src/main/entry.js",
+    "scripts": {
+        "dev": "gulp",
+        "start": "electron --debug=5858 --dev src/main/entry.js"
+    },
     "author": "Conrado Quilles Gomes <conradoqg@gmail.com>",
     "license": "MIT",
     "devDependencies": {

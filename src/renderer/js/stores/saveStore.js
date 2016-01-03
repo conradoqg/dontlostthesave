@@ -1,9 +1,9 @@
 var Reflux = require('reflux');
 var SaveActions = require('../actions/saveActions.js');
 var Promise = require('bluebird');
+var moment = require('moment');
 var remote = require('remote');
 
-/*
 var sampleData = [
     {
         path: 'c:\\asdasd\\asdasda\\dasd',
@@ -28,8 +28,8 @@ var sampleData = [
     },
     {
         path: 'c:\\asdasd\\asdasda\\dasdsd',
-        name: 'Name',
-        date: moment().toISOString(),
+        name: 'Important Save',
+        date: moment().subtract(4, 'minutes').toISOString(),
         formatedDate: moment().fromNow(),
         slots: [
             {
@@ -55,7 +55,7 @@ var sampleData = [
             }
         ]
     }
-];*/
+];
 
 module.exports = Reflux.createStore({
 
@@ -67,6 +67,14 @@ module.exports = Reflux.createStore({
         this.listenTo(SaveActions.load, this.fetchData);
     },
 
+    getInitialState: function() {
+        if (remote.process.argv.indexOf('--sample') >= 0) {
+            return {
+                saves: sampleData
+            };
+        }
+    },
+
     fetchData: function () {
         Promise.resolve(remote.app.backups.getAll())
             .then(SaveActions.load.completed)
@@ -74,11 +82,13 @@ module.exports = Reflux.createStore({
     },
 
     onLoadCompleted: function (saves) {
-        this.trigger({
-            message: this.message,
-            saves: saves
-        });
-        if (this.message) this.message = null;
+        if (remote.process.argv.indexOf('--sample') < 0) {
+            this.trigger({
+                message: this.message,
+                saves: saves
+            });
+            if (this.message) this.message = null;
+        }
     },
 
     onLoadFailed: function (error) {
