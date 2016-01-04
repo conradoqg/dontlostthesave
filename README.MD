@@ -3,7 +3,7 @@
 
 ## Instalation
 
-* Download the [Installer](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveSetup0.0.1.exe) (or the [Standalone](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveStandalone0.0.1.zip));
+* Download the [Installer](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveSetup0.0.2.exe) (or the [Standalone](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveStandalone0.0.2.zip)) - `v0.0.2`;
 * Follow the setup instructions;
 * Start the app;
 * Search the Don't Starve directory and select the place to save the backup;
@@ -46,7 +46,7 @@ This app is made using:
 The important ones are:
 * Default - Compile and watch the sources (to recompile when need). When you modify a main .js file, you need to restart the app;
 * Help - Details the avaliable tasks;
-* Dist - Compiles, Builds, and generate the Dist version, containing the electron app and the installer. (Requires NSIS installed)
+* Dist - Compiles, Builds, and generate the Dist version, containing the electron app and the installer. (Requires NSIS installed and in the PATH environment variable)
 
 ### Contribution
 
