@@ -92,6 +92,7 @@ module.exports = Reflux.createStore({
     },
 
     onLoadFailed: function (error) {
+        console.error(error.stack);
         this.message = {
             error: error.message
         };

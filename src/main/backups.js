@@ -14,7 +14,8 @@ Backups.prototype.getAll = function () {
     var self = this;
     return Promise
         .try(function () {
-            return fs.readdirAsync(self.settings.getSavesPath());
+            if (self.settings.validSavesPath()) return fs.readdirAsync(self.settings.getSavesPath());
+            return [];
         }).then(function (files) {
             files = files.sort().reverse();
             return files.map(function (file) {
@@ -27,7 +28,8 @@ Backups.prototype.getLast = function (n) {
     var self = this;
     return Promise
         .try(function () {
-            return fs.readdirAsync(self.settings.getSavesPath());
+            if (self.settings.validSavesPath()) return fs.readdirAsync(self.settings.getSavesPath());
+            return [];
         }).then(function (files) {
             files = files.sort().reverse();
             files = files.slice(Math.max(files.length - n, 0));

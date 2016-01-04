@@ -29,7 +29,6 @@ This app is made using:
 
     $ git clone git@gitlab.com:conradoqg/dontlostthesave.git
     $ npm install
-    $ npm install -g electron-prebuilt
     $ npm install -g gulp
 
 ### Running

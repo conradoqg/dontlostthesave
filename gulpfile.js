@@ -167,6 +167,7 @@ gulp.task('dist', function (callback) {
         'build',
         'clean:dist',
         'dist:electron',
+        'dist:standalone',
         'dist:installer',
         callback
         );
@@ -188,7 +189,6 @@ gulp.task('dist:electron', function () {
                 cache: './cache',
                 version: 'v0.36.0',
                 packaging: false,
-                asar: false,
                 platforms: ['win32-ia32'],
                 platformResources: {
                     win: {
@@ -202,6 +202,13 @@ gulp.task('dist:electron', function () {
         gulp.src('./resources/icons/dontlostthesave.ico')
             .pipe(gulp.dest('./dist/package/v0.36.0/win32-ia32/'))
     );
+});
+
+gulp.task('dist:standalone', function () {
+    var packageJson = require('./build/package.json');
+    return gulp.src('./dist/package/v0.36.0/win32-ia32/**/*')
+            .pipe(plugins.zip('dontlostthesaveStandalone'+ packageJson.version +'.zip'))
+            .pipe(gulp.dest('./dist/package/'));
 });
 
 gulp.task('dist:installer', function (callback) {
@@ -230,7 +237,7 @@ function createInstaller(callback) {
         productName: packageJson.name,
         version: packageJson.version,
         src: '../package/v0.36.0/win32-ia32',
-        dest: './dontlostthesaveSetup.exe',
+        dest: './dontlostthesaveSetup'+ packageJson.version +'.exe',
         icon: '../../resources/icons/dontlostthesave.ico',
         banner: '..\\..\\resources\\images\\banner.bmp'
     });

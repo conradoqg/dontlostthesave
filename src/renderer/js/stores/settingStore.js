@@ -7,14 +7,7 @@ module.exports = Reflux.createStore({
     listenables: [SettingActions],
 
     getInitialState: function () {
-        if (remote.app.settings.exists()) {
-            return remote.app.settings.get();
-        } else {
-            return {
-                dnsPath: null,
-                savesPath: null
-            };
-        }
+        return remote.app.settings.get();
     },
 
     onSetDNSPath: function (path) {

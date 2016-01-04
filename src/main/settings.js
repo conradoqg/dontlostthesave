@@ -45,7 +45,14 @@ Settings.prototype.get = function () {
             return json;
         }
     } catch (e) {
-        return null;
+        if (process.argv.indexOf('--dev') >= 0) {
+            return testPaths;
+        } else {
+            return {
+                dnsPath: null,
+                savesPath: null
+            };
+        }
     }
 };
 

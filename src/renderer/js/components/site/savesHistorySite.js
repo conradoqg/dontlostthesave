@@ -4,6 +4,7 @@ var SaveList = require('components/parts/saveList.js');
 var SaveStore = require('stores/saveStore.js');
 var SaveActions = require('actions/saveActions.js');
 var electron = window.require('electron');
+var remote = require('remote');
 
 module.exports = React.createClass({
 
@@ -12,7 +13,9 @@ module.exports = React.createClass({
     mixins: [Reflux.connect(SaveStore,'data')],
 
     componentDidMount: function() {
-        SaveActions.load();
+        if (remote.process.argv.indexOf('--sample') < 0) {
+            SaveActions.load();
+        }
         electron.ipcRenderer.on('newSaves', this.newSavesHandler);
     },
 
