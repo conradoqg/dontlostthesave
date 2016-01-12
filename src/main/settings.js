@@ -18,7 +18,7 @@ util.inherits(Settings, EventEmitter);
 Settings.prototype.exists = function () {
     try {
         fs.readJsonSync(this.path);
-        return this.getDNSPath() && this.getSavesPath();
+        return true;
     } catch (e) {
         return false;
     }

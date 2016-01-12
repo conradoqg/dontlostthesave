@@ -1,12 +1,12 @@
 {
   "name": "dontlostthesave",
   "displayName": "Don't Lost The Save",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Don't lost your Don't Starve saves anymore.",
   "main": "src/main/entry.js",
   "scripts": {
     "dev": "gulp",
-    "start": "node node_modules/electron-prebuilt/cli.js --debug=5858 --enable-logging --dev src/main/entry.js"
+    "start": "node node_modules/electron-prebuilt/cli.js --debug=5858 --enable-logging --sample --dev src/main/entry.js"
   },
   "author": "Conrado Quilles Gomes <conradoqg@gmail.com>",
   "license": "MIT",
