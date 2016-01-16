@@ -3,7 +3,7 @@
 
 ## Instalation
 
-* Download the [Installer](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveSetup0.0.3.exe) (or the [Standalone](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveStandalone0.0.3.zip)) - `v0.0.3`;
+* Download the [Installer](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveSetup0.1.0.exe) (or the [Standalone](https://s3-sa-east-1.amazonaws.com/releases.conradoqg.eti.br/dontlostthesave/dontlostthesaveStandalone0.1.0.zip)) - `v0.1.0`;
 * Follow the setup instructions;
 * Start the app;
 * Search the Don't Starve directory and select the place to save the backup;
