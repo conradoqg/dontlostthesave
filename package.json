@@ -1,7 +1,7 @@
 {
   "name": "dontlostthesave",
   "displayName": "Don't Lost The Save",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Don't lost your Don't Starve saves anymore.",
   "main": "src/main/entry.js",
   "scripts": {

@@ -58,7 +58,12 @@ module.exports = React.createClass({
         var hasData = this.state.data;
 
         if (!hasData) {
-            return (<div className="ui active centered large inline loader"></div>);
+            return (
+                <div>
+                    <h2><i className="archive icon"></i>Saves History</h2>
+                    <div className="ui divider"></div>
+                    <div className="ui active centered large inline loader"></div>
+                </div>);
         } else {
             var hasSaves = (this.state.data.saves && (this.state.data.saves.length !== 0));
             var hasMessage = this.state.data.message;

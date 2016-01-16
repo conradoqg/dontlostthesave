@@ -79,6 +79,7 @@ module.exports = Reflux.createStore({
     },
 
     fetchData: function () {
+        this.trigger();
         Promise.resolve(remote.app.backups.getFiltered(this.filter.last, this.filter.nameds))
             .then(SaveActions.load.completed)
             .catch(SaveActions.load.failed);
