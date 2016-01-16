@@ -215,6 +215,22 @@ gulp.task('dist:installer', function (callback) {
     return createInstaller(callback);
 });
 
+gulp.task('bump:patch', function () {
+    return gulp.src(['./package.json', './bower.json'])
+        .pipe(plugins.bump({ type: 'patch' }))
+        .pipe(gulp.dest('./'));
+});
+gulp.task('bump:minor', function () {
+    return gulp.src(['./package.json', './bower.json'])
+        .pipe(plugins.bump({ type: 'minor' }))
+        .pipe(gulp.dest('./'));
+});
+gulp.task('bump:major', function () {
+    return gulp.src(['./package.json', './bower.json'])
+        .pipe(plugins.bump({ type: 'major' }))
+        .pipe(gulp.dest('./'));
+});
+
 function createInstaller(callback) {
     var fs = require('fs-extra');
     var packageJson = require('./build/package.json');
