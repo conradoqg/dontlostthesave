@@ -45,13 +45,14 @@ Backups.prototype.restore = function (fromDirectoryPath) {
 
     return Promise
         .try(function () {
-            return fs.copyAsync(fromDirectoryPath, destination);
+            return fs.emptyDirAsync(destination);
         }).catch(function (e) {
             throw new Error('Can\'t restore the save, maybe Don\'t Starve is running?');
         }).then(function () {
-            return fs.emptyDirAsync(destination);
-        }).then(function () {
             return fs.copyAsync(fromDirectoryPath, destination);
+        }).then(function () {
+            var namePath = path.resolve(destination, 'name');
+            if (fs.existsSync(namePath)) return fs.removeAsync(namePath);
         });
 };
 
