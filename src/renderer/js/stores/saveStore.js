@@ -1,5 +1,6 @@
 var Reflux = require('reflux');
-var SaveActions = require('../actions/saveActions.js');
+var SaveActions = require('actions/saveActions.js');
+var SettingStore = require('stores/settingStore.js');
 var Promise = require('bluebird');
 var moment = require('moment');
 var remote = require('remote');
@@ -62,12 +63,14 @@ module.exports = Reflux.createStore({
     listenables: [SaveActions],
 
     message: null,
+    filter: remote.app.settings.get().state || {},
 
     init: function () {
         this.listenTo(SaveActions.load, this.fetchData);
+        this.listenTo(SettingStore, this.updateFilter);
     },
 
-    getInitialState: function() {
+    getInitialState: function () {
         if (remote.process.argv.indexOf('--sample') >= 0) {
             return {
                 saves: sampleData
@@ -76,7 +79,7 @@ module.exports = Reflux.createStore({
     },
 
     fetchData: function () {
-        Promise.resolve(remote.app.backups.getAll())
+        Promise.resolve(remote.app.backups.getFiltered(this.filter.last, this.filter.nameds))
             .then(SaveActions.load.completed)
             .catch(SaveActions.load.failed);
     },
@@ -120,5 +123,13 @@ module.exports = Reflux.createStore({
             .catch(SaveActions.load.failed)
             .then(this.fetchData);
 
+    },
+
+    updateFilter: function(setting) {
+        this.filter = {
+            last: (setting.state ? setting.state.last : 10),
+            nameds: (setting.state ? setting.state.nameds : false)
+        };
+        this.fetchData();
     }
 });

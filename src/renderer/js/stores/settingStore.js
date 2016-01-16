@@ -10,19 +10,27 @@ module.exports = Reflux.createStore({
         return remote.app.settings.get();
     },
 
+    load: function() {
+        this.trigger(remote.app.settings.get());
+    },
+
     onSetDNSPath: function (path) {
         remote.app.settings.setDNSPath(path);
-        this.trigger(remote.app.settings.get());
+        this.load();
     },
 
     onSetSavesPath: function (path) {
         remote.app.settings.setSavesPath(path);
-        this.trigger(remote.app.settings.get());
+        this.load();
     },
 
-    onGet: function () {
-        return {
-            settings: remote.app.settings.get()
-        };
+    onSetState: function(newState) {
+        var oldSettings = remote.app.settings.get();
+        var oldState = oldSettings.state || {};
+        var mergedState = $.extend({}, oldState, newState);
+        remote.app.settings.setState(mergedState);
+        this.trigger({
+            state: mergedState
+        });
     }
 });

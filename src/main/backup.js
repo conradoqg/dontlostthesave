@@ -4,7 +4,7 @@ var path = require('path');
 var moment = require('moment');
 var fs = require('fs');
 
-var extractData = function(filenamePath) {
+var extractData = function (filenamePath) {
     var zlib = require('zlib');
     var dnsParser = require('./dnsParser.js');
     var data = fs.readFileSync(filenamePath, 'utf-8');
@@ -12,7 +12,7 @@ var extractData = function(filenamePath) {
     buffer = buffer.slice(16);
     buffer = zlib.inflateSync(buffer);
     var bufferString = buffer.toString();
-    fs.writeFileSync(filenamePath + '.dec', bufferString, 'utf-8');
+    //fs.writeFileSync(filenamePath + '.dec', bufferString, 'utf-8');
     var save = dnsParser.parse(bufferString);
     return save;
 };
@@ -28,7 +28,7 @@ Backup.prototype.extractInfo = function () {
 
     try {
         save = extractData(path.resolve(this.directoryPath, 'saveindex'));
-    } catch(e) {
+    } catch (e) {
 
     }
 
@@ -51,16 +51,22 @@ Backup.prototype.extractInfo = function () {
     }
 };
 
-Backup.prototype.getName = function() {
+Backup.prototype.getName = function () {
     var name = null;
     var namePath = path.resolve(this.directoryPath, 'name');
     if (fs.existsSync(namePath)) name = fs.readFileSync(namePath, 'utf-8');
     return name;
 };
 
-Backup.prototype.setName = function(name) {
+Backup.prototype.setName = function (name) {
     var namePath = path.resolve(this.directoryPath, 'name');
-    if (fs.existsSync(namePath)) fs.writeFileSync(namePath, name, 'utf-8');
+    if (fs.existsSync(namePath)) {
+        if (name.trim() === '') {
+            fs.unlinkSync(namePath);
+        } else {
+            fs.writeFileSync(namePath, name, 'utf-8');
+        }
+    }
     return name;
 };
 

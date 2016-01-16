@@ -10,7 +10,7 @@ var Backups = function (settings) {
     this.settings = settings;
 };
 
-Backups.prototype.getAll = function () {
+Backups.prototype.getFiltered = function (last, nameds) {
     var self = this;
     return Promise
         .try(function () {
@@ -18,21 +18,12 @@ Backups.prototype.getAll = function () {
             return [];
         }).then(function (files) {
             files = files.sort().reverse();
-            return files.map(function (file) {
-                return new Backup(path.resolve(self.settings.getSavesPath(), file));
-            });
-        });
-};
-
-Backups.prototype.getLast = function (n) {
-    var self = this;
-    return Promise
-        .try(function () {
-            if (self.settings.validSavesPath()) return fs.readdirAsync(self.settings.getSavesPath());
-            return [];
-        }).then(function (files) {
-            files = files.sort().reverse();
-            files = files.slice(Math.max(files.length - n, 0));
+            if (last)
+                files = files.slice(0, Math.min(files.length, last));
+            if (nameds)
+                files = files.filter(function(value) {
+                    return fs.existsSync(path.resolve(self.settings.getSavesPath(),value, 'name'));
+                });
             return files.map(function (file) {
                 return new Backup(path.resolve(self.settings.getSavesPath(), file));
             });
@@ -55,7 +46,7 @@ Backups.prototype.restore = function (fromDirectoryPath) {
     return Promise
         .try(function () {
             return fs.copyAsync(fromDirectoryPath, destination);
-        }).catch(function(e) {
+        }).catch(function (e) {
             throw new Error('Can\'t restore the save, maybe Don\'t Starve is running?');
         }).then(function () {
             return fs.emptyDirAsync(destination);
@@ -75,7 +66,11 @@ Backups.prototype.nameIt = function (name, dirPath) {
     var namePath = path.resolve(dirPath, 'name');
     return Promise
         .try(function () {
-            return fs.writeFileAsync(namePath, name, 'utf-8');
+            if (name.trim() === '') {
+                if (fs.existsSync(namePath)) fs.unlinkSync(namePath);
+            } else {
+                return fs.writeFileAsync(namePath, name, 'utf-8');
+            }
         });
 };
 
