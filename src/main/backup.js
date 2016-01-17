@@ -2,7 +2,7 @@
 
 var path = require('path');
 var moment = require('moment');
-var fs = require('fs');
+var fs = require('fs-extra');
 
 var extractData = function (filenamePath) {
     var zlib = require('zlib');
@@ -12,8 +12,8 @@ var extractData = function (filenamePath) {
     buffer = buffer.slice(16);
     buffer = zlib.inflateSync(buffer);
     var bufferString = buffer.toString();
-    //fs.writeFileSync(filenamePath + '.dec', bufferString, 'utf-8');
     var save = dnsParser.parse(bufferString);
+    fs.writeJsonSync(filenamePath + '.json', save);
     return save;
 };
 
@@ -25,9 +25,15 @@ var Backup = function (directoryPath) {
 
 Backup.prototype.extractInfo = function () {
     var save = null;
+    var saveIndexPath = path.resolve(this.directoryPath, 'saveindex');
+    var saveIndexPathDec = path.resolve(this.directoryPath, 'saveindex.json');
 
     try {
-        save = extractData(path.resolve(this.directoryPath, 'saveindex'));
+        if (!fs.existsSync(saveIndexPathDec)) {
+            save = extractData(saveIndexPath);
+        } else {
+            save = fs.readJsonSync(saveIndexPathDec);
+        }
     } catch (e) {
 
     }

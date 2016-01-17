@@ -14,12 +14,31 @@ module.exports = React.createClass({
 
     mixins: [Reflux.connect(SaveStore,'data'), Reflux.connect(SettingStore,'setting')],
 
+    setPopupTimeout: null,
+
     componentDidMount: function() {
         if (remote.process.argv.indexOf('--sample') < 0) {
             SaveActions.load();
             SettingActions.load();
         }
         electron.ipcRenderer.on('newSaves', this.newSavesHandler);
+
+    },
+
+    componentDidUpdate: function() {
+        if (this.setPopupTimeout) {
+            clearTimeout(this.setPopupTimeout);
+        }
+        this.setPopupTimeout = setTimeout(function() {
+            $('.hasPopup').popup({
+                inline   : false,
+                hoverable: true,
+                delay: {
+                    show: 100,
+                    hide: 300
+                }
+            });
+        },200);
     },
 
     handleAllItensClick: function(event) {

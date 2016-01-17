@@ -21,8 +21,8 @@ Backups.prototype.getFiltered = function (last, nameds) {
             if (last)
                 files = files.slice(0, Math.min(files.length, last));
             if (nameds)
-                files = files.filter(function(value) {
-                    return fs.existsSync(path.resolve(self.settings.getSavesPath(),value, 'name'));
+                files = files.filter(function (value) {
+                    return fs.existsSync(path.resolve(self.settings.getSavesPath(), value, 'name'));
                 });
             return files.map(function (file) {
                 return new Backup(path.resolve(self.settings.getSavesPath(), file));
@@ -37,6 +37,8 @@ Backups.prototype.backupFrom = function (fromDirectoryPath) {
             return fs.mkdirsAsync(destinationPath);
         }).then(function () {
             return fs.copyAsync(fromDirectoryPath, destinationPath);
+        }).then(function () {
+            return new Backup(destinationPath);
         });
 };
 
@@ -53,6 +55,9 @@ Backups.prototype.restore = function (fromDirectoryPath) {
         }).then(function () {
             var namePath = path.resolve(destination, 'name');
             if (fs.existsSync(namePath)) return fs.removeAsync(namePath);
+        }).then(function () {
+            var parsedPath = path.resolve(destination, 'saveindex.dec');
+            if (fs.existsSync(parsedPath)) return fs.removeAsync(parsedPath);
         });
 };
 

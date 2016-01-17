@@ -45,17 +45,6 @@ var dlcName = {
 };
 
 module.exports = React.createClass({
-    componentDidMount: function() {
-        $('.hasPopup').popup({
-            inline   : false,
-            hoverable: true,
-            delay: {
-                show: 100,
-                hide: 300
-            }
-        });
-    },
-
     getCharacterImagePath: function(character) {
         if (!charactersImages[character])
             character = 'unknow';
