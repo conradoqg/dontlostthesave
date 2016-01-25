@@ -47,9 +47,8 @@ Backup.prototype.extractInfo = function () {
             if (slot.character) {
                 this.slots.push({
                     character: slot.character,
-                    dlc: slot.dlc,
+                    dlc: (slot.dlc && slot.dlc.REIGN_OF_GIANTS ? 'ROG' : (slot.dlc && slot.dlc.CAPY_DLC ? 'Shipwrecked' : 'Normal')),
                     mode: slot.current_mode,
-                    world: (slot.modes[slot.current_mode] && slot.modes[slot.current_mode].world && slot.modes[slot.current_mode].world),
                     day: (slot.modes[slot.current_mode] && slot.modes[slot.current_mode].day && slot.modes[slot.current_mode].day)
                 });
             }

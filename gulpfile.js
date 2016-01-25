@@ -50,23 +50,41 @@ gulp.task('compile-src:main:js', function () {
 });
 
 gulp.task('compile-src:renderer', [
-    'compile-src:renderer:vendor',
+    'compile-src:renderer:vendor:replace',
     'compile-src:renderer:js',
+    'compile-src:renderer:less',
     'compile-src:renderer:css',
     'compile-src:renderer:images',
+    'compile-src:renderer:fonts',
     'compile-src:renderer:html'
 ]);
+
+gulp.task('compile-src:renderer:vendor', function () {
+    return gulp.src('bower_components/**/*')
+        .pipe(gulp.dest('compile/src/renderer/vendor'));
+});
+
+gulp.task('compile-src:renderer:vendor:replace', ['compile-src:renderer:vendor'], function () {
+    return gulp.src('compile/src/renderer/vendor/semantic-ui/dist/semantic.css')
+        .pipe(plugins.replace(/'https:\/\/fonts\.googleapis\.com\/css\?family=Lato:400,700,400italic,700italic&subset=latin'/g, '\'../../../googleFont.css\''))
+        .pipe(gulp.dest('compile/src/renderer/vendor/semantic-ui/dist'));
+});
 
 gulp.task('compile-src:renderer:js', function (callback) {
     webpack(webpackConfig).run(webpackLogger(callback));
 });
 
-gulp.task('compile-src:renderer:css', function () {
-    return gulp.src('src/renderer/less/main.less')
+gulp.task('compile-src:renderer:less', function () {
+    return gulp.src('src/renderer/css/main.less')
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.less())
         .pipe(plugins.rename('main.css'))
         .pipe(plugins.sourcemaps.write('./'))
+        .pipe(gulp.dest('compile/src/renderer'));
+});
+
+gulp.task('compile-src:renderer:css', function () {
+    return gulp.src('src/renderer/css/*.css')
         .pipe(gulp.dest('compile/src/renderer'));
 });
 
@@ -75,14 +93,14 @@ gulp.task('compile-src:renderer:images', function () {
         .pipe(gulp.dest('compile/src/renderer/images'));
 });
 
+gulp.task('compile-src:renderer:fonts', function () {
+    return gulp.src('src/renderer/fonts/**/*')
+        .pipe(gulp.dest('compile/src/renderer/fonts'));
+});
+
 gulp.task('compile-src:renderer:html', function () {
     return gulp.src('src/renderer/html/main.html')
         .pipe(gulp.dest('compile/src/renderer'));
-});
-
-gulp.task('compile-src:renderer:vendor', function () {
-    return gulp.src('bower_components/**/*')
-        .pipe(gulp.dest('compile/src/renderer/vendor'));
 });
 
 gulp.task('build', function (callback) {
@@ -201,14 +219,14 @@ gulp.task('dist:electron', function () {
             })),
         gulp.src('./resources/icons/dontlostthesave.ico')
             .pipe(gulp.dest('./dist/package/v0.36.0/win32-ia32/'))
-    );
+        );
 });
 
 gulp.task('dist:standalone', function () {
     var packageJson = require('./build/package.json');
     return gulp.src('./dist/package/v0.36.0/win32-ia32/**/*')
-            .pipe(plugins.zip('dontlostthesaveStandalone'+ packageJson.version +'.zip'))
-            .pipe(gulp.dest('./dist/package/'));
+        .pipe(plugins.zip('dontlostthesaveStandalone' + packageJson.version + '.zip'))
+        .pipe(gulp.dest('./dist/package/'));
 });
 
 gulp.task('dist:installer', function (callback) {
@@ -253,7 +271,7 @@ function createInstaller(callback) {
         productName: packageJson.name,
         version: packageJson.version,
         src: '../package/v0.36.0/win32-ia32',
-        dest: './dontlostthesaveSetup'+ packageJson.version +'.exe',
+        dest: './dontlostthesaveSetup' + packageJson.version + '.exe',
         icon: '../../resources/icons/dontlostthesave.ico',
         banner: '..\\..\\resources\\images\\banner.bmp'
     });

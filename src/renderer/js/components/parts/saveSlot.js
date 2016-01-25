@@ -91,7 +91,7 @@ module.exports = React.createClass({
                                 <img className="ui avatar mini image hasPopup" data-content={this.getDLCName(this.props.slot.dlc)} src={this.getDLCImagePath(this.props.slot.dlc)}/><span>{this.capitalizeFirstLetter(this.props.slot.mode)}</span>
                             </div>
                             <div className="description">
-                                Day {this.props.slot.world || '?'} - {this.props.slot.day || '?'}
+                                Day {this.props.slot.day || '?'}
                             </div>
                         </div>
                     </div>

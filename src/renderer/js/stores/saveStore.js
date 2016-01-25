@@ -15,14 +15,12 @@ var sampleData = [
                 character: 'wilson',
                 dlc: 'Shipwrecked',
                 mode: 'survival',
-                world: '1',
                 day: '2'
             },
             {
                 character: 'asda',
                 dlc: 'ROG',
                 mode: 'survival',
-                world: '4',
                 day: '8'
             }
         ]
@@ -37,21 +35,18 @@ var sampleData = [
                 character: 'wes',
                 dlc: null,
                 mode: 'survival',
-                world: '1',
                 day: '8'
             },
             {
                 character: 'waxwell',
                 dlc: 'ROG',
                 mode: 'survival',
-                world: '2',
                 day: '13'
             },
             {
                 character: 'wx78',
                 dlc: 'Shipwrecked',
                 mode: 'survival',
-                world: '1',
                 day: '100'
             }
         ]
