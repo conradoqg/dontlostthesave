@@ -1,5 +1,5 @@
 # Don't Lost The Save
-> Your essential utility tool to avoid the time lost when you die and to accelerate your learning curve of the game. It's backup automatically the saves of the game, and provide detailed information about the Slots, and Character being played. (for Windows only, for now...)
+> Your essential utility tool to avoid the time lost when you die in the game and to accelerate your learning curve. It backups automatically the saves of the game, and provide detailed information about the Slots and Character being played. (for Windows only, for now...)
 
 ## Instalation
 
@@ -12,8 +12,8 @@
 ## Features
 
 * Automatic backup of the saves;
-* Naming, to you find your most valuable saves;
-* Restore button to make your life easy;
+* Naming, so you can find your most valuable saves;
+* Restore button to make your life easier;
 
 ![Screenshot](resources/screenshots/sampleData.png)
 
@@ -44,7 +44,7 @@ This app is made using:
     $ gulp <task>
 
 The important ones are:
-* Default - Compile and watch the sources (to recompile when need). When you modify a main .js file, you need to restart the app;
+* Default - Compile and watch the sources (to recompile when needed). After you modify the main .js file, you need to restart the app;
 * Help - Details the avaliable tasks;
 * Dist - Compiles, Builds, and generate the Dist version, containing the electron app and the installer. (Requires NSIS installed and in the PATH environment variable)
 
