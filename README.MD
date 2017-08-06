@@ -27,7 +27,7 @@ This app is made using:
 
 ### Installation
 
-    $ git clone git@gitlab.com:conradoqg/dontlostthesave.git
+    $ git clone git@github.com:conradoqg/dontlostthesave.git
     $ npm install
     $ npm install -g gulp
 
@@ -56,7 +56,7 @@ Looking for contributors to extend this app to Linux and MacOS.
 
 When you find issues, please report them:
 
-WEB: [https://gitlab.com/conradoqg/dontlostthesave/issues](https://gitlab.com/conradoqg/dontlostthesave/issues)
+WEB: [https://github.com/conradoqg/dontlostthesave/issues](https://gitlab.com/conradoqg/dontlostthesave/issues)
 
 
 ### Contribution and License Agreement
