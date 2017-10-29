@@ -56,7 +56,7 @@ Looking for contributors to extend this app to Linux and MacOS.
 
 When you find issues, please report them:
 
-WEB: [https://github.com/conradoqg/dontlostthesave/issues](https://gitlab.com/conradoqg/dontlostthesave/issues)
+WEB: [https://github.com/conradoqg/dontlostthesave/issues](https://github.com/conradoqg/dontlostthesave/issues)
 
 
 ### Contribution and License Agreement
